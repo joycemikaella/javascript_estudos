@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" id="n1" placeholder="digite o primeiro numero">
+    <input type="text" id="n2" placeholder="digite o segundo numero">
+    <button onclick="calcular()">Calcular</button>
+
+    <select>
+
+        <option value="soma">Soma</option>
+        <option value="sub">Subtração</option>
+        <option value="mult">Multiplicação</option>
+        <option value="div">Divisão</option>
+
+    </select>
+
+    <hr>
+    <label id="resultado"></label>
+
+    <script>
+
+        function calcular() {
+
+            document.getElementById("resultado").innerHTML = ''
+            var opcao = document.getElementsByTagName("select")[0].value
+
+            if (dadosValidos()) {
+                var x = parseInt(document.getElementById("n1").value)
+                var y = parseInt(document.getElementById("n2").value)
+
+                if (opcao == 'soma') {
+                    document.getElementById("resultado").innerHTML = somar(x, y)
+
+                }
+                if (opcao == 'sub') {
+                    document.getElementById("resultado").innerHTML = subtrair(x, y)
+
+                }
+                if (opcao == 'mult') {
+                    document.getElementById("resultado").innerHTML = multiplicar(x, y)
+
+                }
+                if (opcao == 'div') {
+                    document.getElementById("resultado").innerHTML = dividir(x, y)
+
+                }
+            }
+        }
+
+        function somar(n1, n2) {
+            return n1 + n2
+        }
+        function subtrair(n1, n2) {
+            return n1 - n2
+        }
+        function multiplicar(n1, n2) {
+            return n1 * n2
+        }
+        function dividir(n1, n2) {
+            var resultado
+            try {
+
+                if (n2 == 0) {
+                    throw "Não é possível a divisão por zero"
+                }
+                resultado = n1 / n2
+
+            } catch (err) {
+                resultado = err
+            } finally {
+
+                return resultado
+            }
+
+            /* if (n2 == 0) {
+                 return 0
+             }
+             else
+                 return n1 / n2*/
+        }
+
+        function dadosValidos() {
+
+            if (document.getElementById("n1").value == '') {
+                alert("Informe número")
+                document.getElementById("n1").focus()
+                return false
+            }
+
+            if (document.getElementById("n2").value == '') {
+                alert("Informe número")
+                document.getElementById("n2").focus()
+                return false
+            }
+
+            return true
+
+        }
+
+    </script>
+
+
+
+
+</body>
+
+</html>
