@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button onclick="consultar(displayParagrafo)">Consultar - parágrafo</button>
+    <button onclick="consultar(displayTabela)">Consultar - tabela</button>
+    <button onclick="history.go(0)">Limpar</button>
+    
+    <hr>
+    <p></p>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>NOME</th>
+            <th>DESCRICAO</th>
+            <th>PRECO</th>
+        </thead>
+
+        <tbody>
+
+            <!--CONTEUDO DA TABELA É DENTRO DO SCRIPT-->
+
+        </tbody>
+
+    </table>
+
+    <script>
+
+        function consultar(callback) {
+            let url = 'http://localhost:3000/produtos'
+
+            fetch(url)
+                .then(x => x.json())
+                .then(result => callback(result))
+
+        }
+
+        function displayParagrafo(obj) {
+            document.getElementsByTagName("p")[0].innerHTML = 0
+            for (let i = 0; i < obj.length; i++) {
+                document.getElementsByTagName("p")[0].innerHTML += `<br>${obj[i].nome}`
+            }
+        }
+        function displayTabela(lista) {
+            document.getElementsByTagName("tbody")[0].innerHTML = 0
+            for (let i = 0; i < lista.length; i++) {
+                document.getElementsByTagName("tbody")[0].innerHTML += `
+                <tr>
+                    <td>${ lista[i].id }</td>
+                    <td>${ lista[i].nome }</td>
+                    <td>${ lista[i].descricao }</td>
+                    <td>${ lista[i].preco }</td>
+                </tr>`
+
+
+            }
+        }
+
+    </script>
+
+
+</body>
+
+</html>
